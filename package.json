@@ -1,0 +1,31 @@
+{
+  "name": "nextucodbasebuscador_versionnode",
+  "version": "1.0.0",
+  "description": "Ejercicio módulo Backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gvillasana/NextU_REST_API_NodeJS.git"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "nodejs"
+  ],
+  "author": "Guillermo Villasana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gvillasana/NextU_REST_API_NodeJS/issues"
+  },
+  "homepage": "https://github.com/gvillasana/NextU_REST_API_NodeJS#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
