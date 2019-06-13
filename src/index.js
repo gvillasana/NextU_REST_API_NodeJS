@@ -1,5 +1,7 @@
+const http = require('http');
 const express = require('express');
 const app = express();
+const Server = http.createServer(app);
 
 //settings
 app.set('port', process.env.PORT || 8080);
@@ -11,8 +13,9 @@ app.use(express.json());
 
 //routes
 app.use('/api/inmuebles', require('./routes/inmuebles'));
+app.use(express.static('public'))
 
 // starts the server
-app.listen(app.get('port'), () => {
+Server.listen(app.get('port'), () => {
   console.log(`Server on port ${app.get('port')}`);
 });
