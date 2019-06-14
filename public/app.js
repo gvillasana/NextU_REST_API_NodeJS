@@ -11,7 +11,7 @@ $("#rangoPrecio").ionRangeSlider({
 })
 
 function setSearch() {
-  let busqueda = $('#checkPersonalizada')
+  let busqueda = $('#checkPersonalizada');
   busqueda.on('change', (e) => {
     if (this.customSearch == false) {
       this.customSearch = true
@@ -22,12 +22,39 @@ function setSearch() {
   })
 }
 
-setSearch()
 
 $( document ).ready(function() {
+    setSearch();
+
     $('#buscar').on('click', () => {
+
+      let urlAPI = 'http://localhost:8080/api/inmuebles';
+
+      //Construye la url a partir de los parámetros que se desean enviar
+      let busquedaAvanzada = $('#checkPersonalizada');
+      let selectCiudad = $('#ciudad').val();
+      let selectTipo = $('#tipo').val();
+      let precioMin = $("#rangoPrecio").data("ionRangeSlider").result.from;
+      let precioMax = $("#rangoPrecio").data("ionRangeSlider").result.to;
+
+      //console.log(`cd: '${selectCiudad}' -- Tipo: '${selectTipo}' -- Min: ${precioMin} -- Max: ${precioMax}`);
+
+      if($('#checkPersonalizada').prop('checked')) {
+        let params = '?advanced=true';
+
+        params = selectCiudad==='' ? params : `${params}&ciudad=${selectCiudad}`;
+        params = selectTipo==='' ? params : `${params}&tipo=${selectTipo}`;
+        params = `${params}&pMin=${precioMin}`;
+        params = `${params}&pMax=${precioMax}`;
+
+        urlAPI = urlAPI + params;
+        //urlAPI = urlAPI.replace(/ /g, '%20');
+      }
+
+      console.log(`${urlAPI}`);
+
       $.ajax({
-        url: 'http://localhost:8080/api/inmuebles',
+        url: urlAPI,
         method: 'GET'
         //,data: { id=1, tipo="casa" }
       }).done((data, textStatus, jqXHR) => {
@@ -48,7 +75,6 @@ $( document ).ready(function() {
 
     obtenerListadoCiudades();
     obtenerListadoTipos();
-
 });
 
 
@@ -103,10 +129,6 @@ function obtenerListadoCiudades(){
     url: 'http://localhost:8080/api/inmuebles/ciudades',
     method: 'GET'
   }).done((data, textStatus, jqXHR) => {
-    //console.log('regresé con status: ' + textStatus);
-    console.log(`Total ciudades: ${data.length}`);
-    console.log(data);
-
     $.each(data, function (i, item) {
       $('#ciudad').append($('<option>', {
           value: item.Ciudad,
