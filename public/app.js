@@ -51,15 +51,14 @@ $( document ).ready(function() {
         //urlAPI = urlAPI.replace(/ /g, '%20');
       }
 
-      console.log(`${urlAPI}`);
+      //console.log(`${urlAPI}`);
 
       $.ajax({
         url: urlAPI,
         method: 'GET'
-        //,data: { id=1, tipo="casa" }
       }).done((data, textStatus, jqXHR) => {
         //console.log('regresé con status: ' + textStatus);
-        console.log(`Total registros: ${data.length}`);
+        //console.log(`Total registros: ${data.length}`);
         //console.log(data);
 
         muestraInmuebles(data);
