@@ -24,7 +24,7 @@
   "homepage": "https://github.com/gvillasana/NextU_REST_API_NodeJS#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
